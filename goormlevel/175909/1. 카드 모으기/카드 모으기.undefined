@@ -1,0 +1,36 @@
+import java.io.*;
+import java.util.*;
+
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
+		
+		// 첫번째 줄: n(카드 종류 수), m(제공되는 카드 수)
+		String[] firstLine = br.readLine().split(" ");
+		int n = Integer.parseInt(firstLine[0]);
+		int m = Integer.parseInt(firstLine[1]);
+		
+		// 2 ~ (m+1)번째 줄: 주어지는 카드의 숫자를 배열로 저장
+		int[] cards = new int[m];
+		for (int i = 0; i < m; i++) {
+			cards[i] = Integer.parseInt(br.readLine());
+		}
+
+		// 지금까지 모은 카드 종류
+		Set<Integer> set = new HashSet<>();
+		// 지금까지 주어진 카드 수
+		int count = 0;
+		
+		for (int card : cards) {
+			count++;
+			set.add(card);
+
+			if (set.size() == n) {
+				System.out.println(count);
+				return;
+			}
+		}
+		
+		System.out.println(-1);
+	}
+}
