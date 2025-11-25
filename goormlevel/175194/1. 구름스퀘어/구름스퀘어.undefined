@@ -1,0 +1,34 @@
+import java.io.*;
+import java.util.*;
+
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		// 첫번째 줄: n(행사의 개수)
+		int n = Integer.parseInt(br.readLine());
+		
+		// 2~n번째 줄: 각 행사의 시작 시간과 끝 시간
+		int[][] arr = new int[n][2];
+		for (int i = 0; i < n; i++) {
+			String[] eventTime = br.readLine().split(" ");
+			arr[i][0] = Integer.parseInt(eventTime[0]); // i번째 행사의 시작 시간
+			arr[i][1] = Integer.parseInt(eventTime[1]); // i번째 행사의 끝 시간
+		}
+		
+		// 종료시간 기준 오름차순 정렬
+		Arrays.sort(arr, (a,b) -> Integer.compare(a[1], b[1]));
+		
+		// 가능한 행사 개수 카운트
+		int count = 1;
+		int endTime = arr[0][1];
+		for(int i = 1; i < n; i++) {
+			if(arr[i][0] >= endTime + 1) {
+				count++;
+				endTime = arr[i][1];
+			}
+		}
+
+		System.out.println(count);
+	}
+}
