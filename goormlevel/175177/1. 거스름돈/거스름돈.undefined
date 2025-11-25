@@ -1,0 +1,23 @@
+import java.io.*;
+
+class Main {
+	static final int[] coins = {40, 20, 10, 5, 1};
+	
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		// 입력: n(정수)
+		int n = Integer.parseInt(br.readLine());
+
+		// 필요한 동전의 개수
+		int count = 0;
+
+		// 큰 동전의 값부터 받은 돈을 나눠 필요한 최소 동전의 개수를 구함
+		for(int coin : coins) {
+			count += n / coin;
+			n -= (n/coin) * coin;
+		}
+
+		System.out.println(count);
+	}
+}
