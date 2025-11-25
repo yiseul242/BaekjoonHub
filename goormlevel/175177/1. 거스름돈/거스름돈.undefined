@@ -1,20 +1,23 @@
 import java.io.*;
 
 class Main {
+	// 사용 가능한 동전 단위, 큰 단위부터 순서대로
 	static final int[] coins = {40, 20, 10, 5, 1};
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		// 입력: n(정수)
+		// 입력: n(거슬러 줄 돈)
 		int n = Integer.parseInt(br.readLine());
 
-		// 필요한 동전의 개수
+		// 필요한 동전의 최소 개수를 저
 		int count = 0;
 
-		// 큰 동전의 값부터 받은 돈을 나눠 필요한 최소 동전의 개수를 구함
+		// 큰 단위 동전부터 차례대로 사용
 		for(int coin : coins) {
+			// 해당 동전으로 몇 개를 사용할 수 있는지 계산
 			count += n / coin;
+			// 사용한 동전만큼 금액을 차감
 			n -= (n/coin) * coin;
 		}
 
