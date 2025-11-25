@@ -1,0 +1,36 @@
+import java.io.*;
+
+class Main {
+	// 문제에 주어진 모듈러 상수
+	static final long MOD = 1_000_000_007L;
+	
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		// 입력: 수열의 k번쨰 값을 구하기 위한 k
+		int k = Integer.parseInt(br.readLine());
+
+		// 수열 초기값 처리
+		if (k == 1) {
+			System.out.println(0);
+			return;
+		}
+
+		if (k == 2) {
+			System.out.println(1);
+			return;
+		}
+
+		// 반복문을 위한 변수 초기화
+		long prev2 = 0, prev1 = 1, curr = 0;
+
+		// i = 3부터 k까지 반복하며 수열 계산
+		for (int i = 3; i <= k; i++) {
+			curr = (prev2 + prev1) % MOD;
+			prev2 = prev1;
+			prev1 = curr;
+		}
+		
+		System.out.println(curr);
+	}
+}
