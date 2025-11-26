@@ -1,0 +1,42 @@
+import java.io.*;
+
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		// 첫째 줄: n(격자 판의 크기)
+		int n = Integer.parseInt(br.readLine());
+		
+		// 2~(n+1) 줄: 격자 판의 상태를 2차원 배열에 저장
+		int[][] arr = new int[n][n];
+		for (int i = 0; i < n; i++) {
+			String[] input = br.readLine().split(" ");
+			for (int j = 0; j < n; j++) {
+				arr[i][j] = Integer.parseInt(input[j]);
+			}
+		}
+		
+		// 0의 위치 찾기(i번째 행, j번째 열)
+		int zeroRow = 0, zeroCol = 0;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				if (arr[i][j] == 0) {
+					zeroRow = i;
+					zeroCol = j;
+					break; // 0은 단 한번만 주어지므로 찾으면 break
+				}
+			}
+		}
+
+		// 0의 위치를 기준으로 가로, 세로에 있는 모든 수를 합한 값
+		int sum = 0;
+		
+		// i번째 행/j번째 열의 값 합산
+		for (int i = 0; i < n; i++) {
+			sum += arr[zeroRow][i];
+			sum += arr[i][zeroCol];
+		}
+		
+		System.out.println(sum);
+	}
+}
